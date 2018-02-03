@@ -1,0 +1,20 @@
+<div class="ui center aligned middle aligned grid">
+	<div class="column four wide">
+		<h1>Log-In {{ user.name }}</h1>
+		<div class="ui segment left aligned">
+			<div class="content">
+				<form class="ui form">
+					<div class="field">
+						<label>Username</label>
+						<input type="text" name="username" />
+					</div>
+					<div class="field">
+						<label>Password</label>
+						<input type="password" name="password" />
+					</div>
+					<button class="ui button" type="submit" (click)="loginButtonPressed()">Log-In</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
