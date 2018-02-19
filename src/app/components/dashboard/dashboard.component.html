@@ -1,21 +1,22 @@
 <div class="ui attached stackable menu">
-	<div class="ui container">
+	<div class="ui container pusher">
 		<div class="item">
-			<h3 class="light">Mentis</h3>
+			<a routerLink="/dashboard"><h3 class="light">Mentis</h3></a>
 		</div>
-		<a class="item">Dashboard</a>
-		<a class="item">Repositories</a>
-		<div class="ui dropdown item">
+		<div class="ui dropdown item simple">
 			Create
+			<i class="icon dropdown"></i>
 			<div class="menu">
-				<a class="item">Repository</a>
+				<a class="item" routerLink="create/repo">Repository</a>
 				<a class="item">Project</a>
 			</div>
 		</div>
-		<a class="right item">Log-Out</a>
+		<a class="item" routerLink="settings">Settings</a>
+		<a class="right item" routerLink="/">Log-Out</a>
 	</div>
 </div>
 
 <div class="ui container">
+	<app-dashboard-home *ngIf="this.userService.isLoggedIn()"></app-dashboard-home>
 	<router-outlet></router-outlet>
 </div>

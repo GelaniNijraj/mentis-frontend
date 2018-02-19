@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class UserService {
+export default class UserService {
 
   public loggedIn: boolean;
 
