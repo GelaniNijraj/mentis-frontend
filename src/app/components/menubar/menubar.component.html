@@ -1,0 +1,38 @@
+<div *ngIf="this.userService.isLoggedIn()" class="ui attached stackable menu">
+	<div class="item">
+		<a routerLink="/dashboard"><h3 class="light">Mentis</h3></a>
+	</div>
+	<div class="item">
+	    <div class="ui transparent icon input">
+	      <input placeholder="Search..." type="text">
+	      <i class="search icon"></i>
+	    </div>
+	</div>
+	<div class="right menu">
+		<div class="ui dropdown item simple">
+			<i class="icon plus"></i>
+			<div class="menu">
+				<a class="item" routerLink="/repo/new">Repo</a>
+				<a class="item">Project</a>
+			</div>
+		</div>
+		<div class="ui dropdown item simple">
+			<i class="icon user"></i>
+			<div class="menu">
+				<a class="item" routerLink="/repo/all">Your Repos</a>
+				<a class="item" routerLink="/settings">Settings</a>
+				<a class="item" (click)="logout()">Log-Out</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="!this.userService.isLoggedIn()" class="ui large attached stackable top menu">
+	<div class="item">
+		<a routerLink="/"><h3 class="light">Mentis</h3></a>
+	</div>
+	<div class="right menu">
+		<a class="item" routerLink="/login">Log-In</a>
+		<a class="item" routerLink="/register">Register</a>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<div class="ui container" style="margin-top: 8px;">
+	<div class="ui segment" *ngFor="let r of repos">
+		<h2>
+			<a routerLink="/{{userService.getUsername()}}/{{r.name}}">{{r.name}}</a>
+			<span style="font-size: 14px;">{{r.public ? 'PUBLIC' : 'PRIVATE'}}</span>
+		</h2>
+		<p>{{r.description}}</p>
+	</div>
+</div>

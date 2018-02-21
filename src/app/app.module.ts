@@ -1,9 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+
+import { CookieService } from 'ngx-cookie-service';
 
 import { DashboardGuardService } from './services/dashboard-guard.service';
 import UserService from './services/user.service';
+import RepoService from './services/repo.service';
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -13,6 +17,8 @@ import { CreateRepoComponent } from './components/create-repo/create-repo.compon
 import { SettingsComponent } from './components/settings/settings.component';
 import { RepoComponent } from './components/repo/repo.component';
 import { DashboardHomeComponent } from './components/dashboard-home/dashboard-home.component';
+import { MenubarComponent } from './components/menubar/menubar.component';
+import { AllReposComponent } from './components/all-repos/all-repos.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +29,16 @@ import { DashboardHomeComponent } from './components/dashboard-home/dashboard-ho
     CreateRepoComponent,
     SettingsComponent,
     RepoComponent,
-    DashboardHomeComponent
+    DashboardHomeComponent,
+    MenubarComponent,
+    AllReposComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [DashboardGuardService, UserService],
+  providers: [DashboardGuardService, UserService, CookieService, RepoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

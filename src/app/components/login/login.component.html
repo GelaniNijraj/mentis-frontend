@@ -6,13 +6,13 @@
 				<form class="ui form">
 					<div class="field">
 						<label>Username</label>
-						<input type="text" name="username" />
+						<input type="text" name="username" #username />
 					</div>
 					<div class="field">
 						<label>Password</label>
-						<input type="password" name="password" />
+						<input type="password" name="password" #password />
 					</div>
-					<button class="ui button" type="submit" (click)="loginButtonPressed()">Log-In</button>
+					<button class="ui button" type="submit" (click)="loginButtonPressed(username, password)">Log-In</button>
 				</form>
 			</div>
 		</div>
