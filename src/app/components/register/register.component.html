@@ -1,0 +1,33 @@
+<div class="ui center aligned middle aligned grid">
+	<div class="column four wide">
+		<h1>Register</h1>
+		<div class="ui segment left aligned">
+			<div class="content">
+				<form class="ui form">
+					<div class="field">
+						<label>Username</label>
+						<input type="text" name="username" #username />
+					</div>
+					<div class="field">
+						<label>Password</label>
+						<input type="password" name="password" #password />
+					</div>
+					<div class="field">
+						<label>Retype Password</label>
+						<input type="password" name="password" #rpassword />
+					</div>
+					<div class="field">
+						<label>Email</label>
+						<input type="email" name="email" #email />
+					</div>
+					<button class="ui button" type="submit" (click)="registerButtonPressed(username, password, rpassword, email)">Register</button>
+				</form>
+			</div>
+		</div>
+		<div class="ui negative message" *ngIf="error != undefined">
+			<div class="header">
+				{{error}}
+			</div>
+		</div>
+	</div>
+</div>

@@ -6,25 +6,25 @@ import Response from 'app/models/Response';
 import RepoService from 'app/services/repo.service';
 
 @Component({
-  selector: 'app-create-repo',
-  templateUrl: './create-repo.component.html',
-  styleUrls: ['./create-repo.component.css']
+	selector: 'app-create-repo',
+	templateUrl: './create-repo.component.html',
+	styleUrls: ['./create-repo.component.css']
 })
 export class CreateRepoComponent implements OnInit {
-  error: string;
-  constructor(private repoService: RepoService, private router: Router) { }
+	error: string;
+	constructor(private repoService: RepoService, private router: Router) { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
-  createRepo(name, description, _public){
-  	let repo = new Repo();
-  	repo.name = name.value;
-  	repo.description = description.value;
-  	repo.public = _public;
-  	if(repo.name.length == 0){
-  		this.error = "Please enter a valid name";
-  	}else{
+	createRepo(name, description, _public){
+		let repo = new Repo();
+		repo.name = name.value;
+		repo.description = description.value;
+		repo.public = _public;
+		if(repo.name.length == 0){
+			this.error = "Please enter a valid name";
+		}else{
 	  	this.repoService.create(repo).subscribe((res: Response) => {
 	  		if(res.success)
 	  			this.router.navigateByUrl('/repo/all');
@@ -32,7 +32,7 @@ export class CreateRepoComponent implements OnInit {
 	  			this.error = res.message;
 	  	});
 	}
-  	return false;
-  }
+		return false;
+	}
 
 }

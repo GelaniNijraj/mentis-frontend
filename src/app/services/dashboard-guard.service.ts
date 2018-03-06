@@ -5,16 +5,16 @@ import UserService from './user.service';
 @Injectable()
 export class DashboardGuardService implements CanActivate {
 
-  constructor(private userService:UserService, private router:Router) {
-  };
+	constructor(private userService:UserService, private router:Router) {
+	};
 
-  canActivate(){
-  	if(this.userService.isLoggedIn()){
-  		return true;
-  	}else{
-  		this.router.navigateByUrl("/login");
-  		return false;
-  	}
-  }
+	canActivate(){
+		if(this.userService.isLoggedIn()){
+			return true;
+		}else{
+			this.router.navigateByUrl("/login");
+			return false;
+		}
+	}
 
 }

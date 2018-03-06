@@ -3,13 +3,13 @@ import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+	selector: 'app-root',
+	templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'app';
+	title = 'app';
 
-  constructor(private router: Router){
+	constructor(private router: Router){
 
-  }
+	}
 }

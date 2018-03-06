@@ -1,25 +1,22 @@
 <div class="ui container" style="margin-top: 8px;">
 	<h3>
-		<a href="#">GelaniNijraj</a> / <a href="#">hello_world</a>
+		<a [routerLink]="['/', username]">{{username}}</a> / 
+		<a [routerLink]="['/', username, reponame]">{{reponame}}</a>
 	</h3>
 	<p>This is where the repo description goes</p>
 </div>
 <div class="ui container" style="margin-top: 8px;">
 	<div class="ui tabular menu">
-	  <a class="item active">
-	    Code
-	  </a>
-	  <a class="item">
-	    Settings
-	  </a>
+		<a class="item" [routerLinkActive]="['active']" routerLink="code">
+			Code
+		</a>
+		<a class="item" [routerLinkActive]="['active']" routerLink="issues">
+			Issues
+		</a>
+		<a class="item" [routerLinkActive]="['active']" routerLink="settings">
+	    	Settings
+		</a>
 	</div>
 </div>
 
-<h3 class="ui top attached header">Files</h3>
-<div class="ui attached segment">
-
-</div>
-
-<h3 class="ui top attached header">README</h3>
-<div class="ui attached segment">
-</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,34 @@
+<h3 class="ui top attached header">Change Settings</h3>
+<div class="ui attached segment stackable grid">
+	<div class="column eight wide right">
+		<form class="ui form">
+			<div class="field">
+				<label>Repository Name</label>
+				<input type="text" name="reponame" #reponame />
+			</div>
+			<button class="ui button" type="submit">Rename</button>
+		</form>
+		<div class="ui segment">
+			<h3><input type="checkbox" checked style="margin-right: 16px;" />Issues</h3>
+			<p>Issues adds lightweight issue tracking tightly integrated with your repository. Add issues to milestones, label issues, and close and reference issues from commit messages.</p>
+		</div>
+	</div>
+	<div class="column eight wide right">
+		<div class="ui segment">
+			<h3><input type="checkbox" checked style="margin-right: 16px;" />Public</h3>
+			<p>Public repositories can be accessed by anyone and appear in search.</p>
+		</div>
+	</div>
+	<div class="column eight wide right">
+		<div class="ui segment">
+			<h3>Delete Repository</h3>
+			<div class="ui negative message">
+				<div class="header">
+					WARNING!
+				</div>
+				<p>Once the repository is deleted, it can not be recovered.</p>
+			</div>
+			<input type="button" value="Delete" class="ui negative button" />
+		</div>
+	</div>
+</div>

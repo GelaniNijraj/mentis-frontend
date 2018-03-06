@@ -1,0 +1,45 @@
+<h3 class="ui top attached header">Overview</h3>
+<div class="ui attached grid stackable segment">
+	<div class="row" *ngIf="info != undefined">
+		<div class="ui column eight wide left form">
+			<div class="field">
+				<label>Clone URL</label>
+				<input type="text" disabled value="{{info.url}}">
+			</div>
+		</div>
+		<div class="ui column two wide">
+			<p><i class="icon history"></i>{{info.commits}} Commits</p>
+			<p><i class="icon code branch"></i>2 branches</p>
+		</div>
+		<div class="ui column two wide">
+			<p><i class="icon bug"></i>3 Issues</p>
+			<p><i class="icon star"></i>1 Star</p>
+		</div>
+		<div class="ui column four wide right aligned">
+			<button class="ui button yellow">
+				<i class="icon star"></i>Star
+			</button>
+			<button class="ui button">
+				<i class="icon copy"></i>Fork
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="ui attached segments">
+	<div class="ui segment">
+		<h3>Files</h3>
+	</div>
+	<div *ngIf="current != '' && current != undefined" class="ui segment">
+		<a [routerLink]="[{path: parent}]">..</a>
+	</div>
+	<div *ngFor="let f of files" class="ui segment">
+		<i class="icon file grey" *ngIf="f.type == 'file'"></i>
+		<i class="icon folder grey" *ngIf="f.type == 'dir'"></i>
+		<a [routerLink]="[{path: current + '/' + f.name}]">{{f.name}}</a>
+	</div>
+</div>
+
+<!-- <h3 class="ui top attached header">README</h3>
+<div class="ui attached segment">
+</div> -->

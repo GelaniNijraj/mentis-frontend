@@ -1,6 +1,9 @@
 <div *ngIf="this.userService.isLoggedIn()" class="ui attached stackable menu">
 	<div class="item">
-		<a routerLink="/dashboard"><h3 class="light">Mentis</h3></a>
+		<a routerLink="/"><h3 class="light">Mentis</h3></a>
+	</div>
+	<div class="item">
+		Welcome, {{userService.getUsername()}}
 	</div>
 	<div class="item">
 	    <div class="ui transparent icon input">

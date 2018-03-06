@@ -1,6 +1,8 @@
 <app-menubar></app-menubar>
 
 <div class="ui container">
-	<app-dashboard-home *ngIf="this.userService.isLoggedIn()"></app-dashboard-home>
-	<app-home *ngIf="!this.userService.isLoggedIn()"></app-home>
+	<app-dashboard-home></app-dashboard-home>
+	<!-- <app-home *ngIf="!this.userService.isLoggedIn()"></app-home> -->
 </div>
+
+<app-footer></app-footer>

@@ -9,31 +9,31 @@ import Response from 'app/models/Response';
 @Injectable()
 export default class UserService {
 
-  public loggedIn: boolean;
-  private baseUrl: string = 'http://127.0.0.1:3000/api/user/';
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  private options = {headers: this.headers};
+	public loggedIn: boolean;
+	private baseUrl: string = 'http://127.0.0.1:3000/api/user/';
+	private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+	private options = {headers: this.headers};
 
-  constructor(private http: HttpClient, private cookies: CookieService) {
+	constructor(private http: HttpClient, private cookies: CookieService) {
 
-  }
+	}
 
-  isLoggedIn() {
-  	// TODO: validate token
-  	return this.cookies.get('token') != undefined && 
-  			this.cookies.get('token') != 'undefined' && 
-  			this.cookies.get('token') != '';
-  }
+	isLoggedIn() {
+		// TODO: validate token
+		return this.cookies.get('token') != undefined && 
+				this.cookies.get('token') != 'undefined' && 
+				this.cookies.get('token') != '';
+	}
 
-  getToken() {
-  	return this.cookies.get('token');
-  }
+	getToken() {
+		return this.cookies.get('token');
+	}
 
-  getUsername() {
-  	return this.cookies.get('username');
-  }
+	getUsername() {
+		return this.cookies.get('username');
+	}
 
-  login(username: string, password: string, callback) {
+	login(username: string, password: string, callback) {
 	this.http.post(this.baseUrl + 'authenticate', {
 		username, password
 	}, this.options).subscribe((res: Response) => {
@@ -43,19 +43,19 @@ export default class UserService {
 		this.cookies.set('username', username);
 		callback(false);
 	});
-  }
+	}
 
-  register(user: User, callback) {
-  	return this.http.post(this.baseUrl + 'register', {
-  		username: user.username,
-  		email: user.email,
-  		password: user.password
-  	}, this.options);
-  }
+	register(user: User) {
+		return this.http.post(this.baseUrl + 'register', {
+			username: user.username,
+			email: user.email,
+			password: user.password
+		}, this.options);
+	}
 
-  logout(callback){
-  	this.cookies.delete('token');
-  	this.cookies.delete('username');
-  	callback();
-  }
+	logout(callback){
+		this.cookies.delete('token');
+		this.cookies.delete('username');
+		callback();
+	}
 }
