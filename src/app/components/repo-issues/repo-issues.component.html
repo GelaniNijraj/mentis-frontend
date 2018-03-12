@@ -5,14 +5,28 @@
 			<input type="text" class="ui text" placeholder="Search issues..." />
 			<input type="button" class="ui button" value="Search">
 		</div>
-		<div class="column eight wide left">
-			<input type="button" routerLink="create" value="New Issue" class="ui button positive" style="float: right;" />
+		<div class="right aligned column eight wide">
+			<input type="button" routerLink="create" value="New Issue" class="ui button positive" />
+			<input type="button" routerLink="labels" value="Manage Labels" class="ui button blue" />
 		</div>
 	</div>
 	<div class="row">
 		<div class="ui column sixteen wide">
-			<div class="ui info message">
+			<div class="ui info message" *ngIf="issues == undefined || issues.length == 0">
 				<div class="header">No issues created yet.</div>
+			</div>
+			<div class="ui segments">
+				<div class="ui segment" *ngFor="let i of issues">
+					<h3 class="ui header">
+						<a [routerLink]="[i.id]">{{i.title}}</a>
+						<div class="ui horizontal bulleted link list">
+							<a class="item" *ngFor="let j of i.labels" [routerLink]="[j.title]">
+								{{j.title}}
+							</a>
+						</div>
+						<div class="sub header">Created by <a [routerLink]="['/user', i.createdBy.username]">{{i.createdBy.username}}</a></div>
+					</h3>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import RepoService from 'app/services/repo.service';
+import IssueService from 'app/services/issue.service';
 
 @Component({
 	selector: 'app-repo-code',
@@ -16,12 +17,15 @@ export class RepoCodeComponent implements OnInit {
 	info: any;
 	fileRoot: string;
 	current: string;
+	issueCount: number;
 	parent: string;
 
 	constructor(
 		private repoService: RepoService, 
 		private router: Router,
+		private issueService: IssueService,
 		private route: ActivatedRoute) {
+		this.issueCount = 0;
 		route.parent.params.subscribe(params => {
 			this.reponame = params.repo;
 			this.username = params.user;
@@ -35,6 +39,10 @@ export class RepoCodeComponent implements OnInit {
 				});
 				repoService.getInfo(params.user, params.repo).subscribe((res: any) => {
 					this.info = res.data;
+				});
+				issueService.count(params.user, params.repo).subscribe((res: any) => {
+					if(res.success)
+						this.issueCount = res.count;
 				});
 			});
 			// try{

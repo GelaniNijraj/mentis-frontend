@@ -1,0 +1,21 @@
+<h3 class="ui top attached header">Issue Labels</h3>
+<div class="ui attached segment grid">
+	<div class="row">
+		<div class="column ten wide">
+			<div class="ui segments">
+				<div class="ui segment" *ngFor="let l of labels">
+					<h3>{{l.title}}</h3>
+				</div>
+			</div>
+		</div>
+		<div class="column six wide">
+			<form class="ui form">
+				<div class="ui field">
+					<label>Label Title</label>
+					<input type="text" name="name" #name/>
+				</div>
+				<input type="button" class="ui button green inline" (click)="createLabel(name)" value="Add Label">
+			</form>
+		</div>
+	</div>
+</div>

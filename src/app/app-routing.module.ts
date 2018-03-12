@@ -18,6 +18,11 @@ import { RepoCodeComponent } 		from './components/repo-code/repo-code.component'
 import { RepoIssuesComponent } 		from './components/repo-issues/repo-issues.component';
 import { RepoFilesComponent } 		from './components/repo-files/repo-files.component';
 import { IssueCreateComponent } 	from './components/issue-create/issue-create.component';
+import { IssueComponent }			from './components/issue/issue.component';
+import { UserProfileComponent } 	from './components/user-profile/user-profile.component';
+import { UserReposComponent } 		from './components/user-repos/user-repos.component';
+import { UserStarsComponent } 		from './components/user-stars/user-stars.component';
+import { IssueLabelsComponent } 	from './components/issue-labels/issue-labels.component';	
 
 const routes : Routes = [
 	{path: '', component: DashboardComponent, children: [
@@ -25,11 +30,18 @@ const routes : Routes = [
 		{path: 'settings', canActivate: [DashboardGuardService], component: SettingsComponent},
 		{path: 'repo/new', canActivate: [DashboardGuardService], component: CreateRepoComponent},
 		{path: 'repo/all', canActivate: [DashboardGuardService], component: AllReposComponent},
+
+		{path: 'user/:user', component: UserProfileComponent},
+		{path: 'user/:user/repos', component: UserReposComponent},
+		{path: 'user/:user/stars', component: UserStarsComponent},
+
 		{path: ':user/:repo', component: RepoComponent, children: [
 			{path: '', redirectTo: 'code', pathMatch: 'full'},
 			{path: 'code', component: RepoCodeComponent},
 			{path: 'issues', component: RepoIssuesComponent},
+			{path: 'issues/labels', component: IssueLabelsComponent},
 			{path: 'issues/create', component: IssueCreateComponent},
+			{path: 'issues/:id', component: IssueComponent},
 			{path: 'settings', component: RepoSettingsComponent},
 		]}
 	]},

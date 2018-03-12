@@ -1,0 +1,16 @@
+<div class="ui container grid" style="margin-top: 8px;">
+	<div class="column">
+		<h2>{{username}}'s repositories</h2>
+		<div class="ui segment" *ngFor="let r of repos">
+			<h2>
+				<a routerLink="/{{username}}/{{r.name}}">{{r.name}}</a>
+				<span style="font-size: 14px;">{{r.public ? 'PUBLIC' : 'PRIVATE'}}</span>
+			</h2>
+			<p>{{r.description}}</p>
+		</div>
+		<div class="ui info message" *ngIf="repos.length == 0">
+			<div class="header">No repositories created yet.</div>
+			<p>Create new repo <a routerLink="/repo/new">here</a></p>
+		</div>
+	</div>
+</div>

@@ -1,7 +1,7 @@
 <h3 class="ui top attached header">Overview</h3>
 <div class="ui attached grid stackable segment">
 	<div class="row" *ngIf="info != undefined">
-		<div class="ui column eight wide left form">
+		<div class="ui column six wide left form">
 			<div class="field">
 				<label>Clone URL</label>
 				<input type="text" disabled value="{{info.url}}">
@@ -12,15 +12,18 @@
 			<p><i class="icon code branch"></i>2 branches</p>
 		</div>
 		<div class="ui column two wide">
-			<p><i class="icon bug"></i>3 Issues</p>
+			<p><i class="icon bug"></i>{{issueCount}} Issues</p>
 			<p><i class="icon star"></i>1 Star</p>
 		</div>
-		<div class="ui column four wide right aligned">
+		<div class="ui column six wide right aligned">
 			<button class="ui button yellow">
 				<i class="icon star"></i>Star
 			</button>
 			<button class="ui button">
 				<i class="icon copy"></i>Fork
+			</button>
+			<button class="ui green button">
+				<i class="icon plus"></i>Upload File
 			</button>
 		</div>
 	</div>

@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
 		if(res.success)
 			this.router.navigateByUrl('/login');
 		else
-			this.error = 'Something went wrong...';
+			this.error = res.message;
 	});
 	return false;
 	}

@@ -13,5 +13,16 @@
 	<app-root></app-root>
 	<script src="/assets/jquery-3.1.1.min.js"></script>
 	<script src="assets/semantic/dist/semantic.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$(document).on("popup", function(){
+		      $('.addlabel').popup({
+		        inline: true,
+		        hoverable: true,
+		        position: 'bottom left'
+		      });
+			})
+		});
+	</script>
 </body>
 </html>

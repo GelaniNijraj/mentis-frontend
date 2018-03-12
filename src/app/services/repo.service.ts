@@ -38,12 +38,34 @@ export default class RepoService {
 		return this.http.get(this.baseUrl + 'info', { params: params });
 	}
 
+	all(user: string) {
+		let params = new HttpParams();
+		params = params.append('token', this.userService.getToken());
+		params = params.append('username', user);
+		return this.http.get(this.baseUrl + [user, 'repos', 'all'].join('/'), { params: params });
+	}
+
+	count(user: string) {
+		let params = new HttpParams();
+		params = params.append('token', this.userService.getToken());
+		params = params.append('username', user);
+		return this.http.get(this.baseUrl + [user, 'repos', 'count'].join('/'), { params: params });
+	}
+
 	create(repo: Repo) {
 		return this.http.post(this.baseUrl + 'create', {
 			token: this.userService.getToken(),
 			name: repo.name,
-			public: repo.public,
+			public: repo.isPublic,
 			description: repo.description
+		});
+	}
+
+	delete(repo: Repo) {
+		return this.http.post(this.baseUrl + 'delete', {
+			token: this.userService.getToken(),
+			repo: repo.name,
+			owner: repo.owner
 		});
 	}
 

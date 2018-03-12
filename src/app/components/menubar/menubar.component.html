@@ -22,8 +22,9 @@
 		<div class="ui dropdown item simple">
 			<i class="icon user"></i>
 			<div class="menu">
-				<a class="item" routerLink="/repo/all">Your Repos</a>
+				<a class="item" [routerLink]="['/user', userService.getUsername(), 'repos']">Your Repos</a>
 				<a class="item" routerLink="/settings">Settings</a>
+				<a class="item" [routerLink]="['/user', userService.getUsername()]">Profile</a>
 				<a class="item" (click)="logout()">Log-Out</a>
 			</div>
 		</div>

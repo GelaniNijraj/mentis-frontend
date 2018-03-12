@@ -1,24 +1,24 @@
 <div class="ui container two column grid" style="margin-top: 8px;">
 	<div class="column">
 		<h2>Create a new repository</h2>
-		<form class="ui form">
+		<form class="ui form" #newRepoForm="ngForm" (ngSubmit)="onSubmit()">
 			<div class="field">
 				<label>Repository name</label>
-				<input type="text" name="name" #name>
+				<input type="text" name="name" [(ngModel)]="repo.name" required>
 			</div>
 			<div class="field">
 				<label>Description</label>
-				<input type="text" name="name" #description>
+				<input type="text" name="description" [(ngModel)]="repo.description" required>
 			</div>
 			<div class="inline field">
-				<input tabindex="0" class="hidden" type="radio" id="public" name="visibility" checked #public>
+				<input tabindex="0" class="hidden" type="radio" id="public" name="visibility" [value]="true" checked [(ngModel)]="repo.isPublic">
 				<label for="public">Public</label>
 			</div>
 			<div class="inline field">
-				<input tabindex="0" class="hidden" type="radio" id="private" name="visibility">
+				<input tabindex="0" class="hidden" type="radio" id="private" name="visibility" [value]="false" [(ngModel)]="repo.isPublic">
 				<label for="private">Private</label>
 			</div>
-			<button class="ui positive button" (click)="createRepo(name, description, public)">Create</button>
+			<button class="ui positive button" [disabled]="!newRepoForm.form.valid">Create</button>
 		</form>
 		<div class="ui negative message" *ngIf="error != undefined">
 			<div class="header">

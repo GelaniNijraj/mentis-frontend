@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
@@ -8,6 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DashboardGuardService } from './services/dashboard-guard.service';
 import UserService from './services/user.service';
 import RepoService from './services/repo.service';
+import IssueService from './services/issue.service';
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -26,7 +28,11 @@ import { RepoIssuesComponent } from './components/repo-issues/repo-issues.compon
 import { RepoFilesComponent } from './components/repo-files/repo-files.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { IssueCreateComponent } from './components/issue-create/issue-create.component';
-import { IssueComponent } from './issue/issue.component';
+import { IssueComponent } from './components/issue/issue.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserReposComponent } from './components/user-repos/user-repos.component';
+import { UserStarsComponent } from './components/user-stars/user-stars.component';
+import { IssueLabelsComponent } from './components/issue-labels/issue-labels.component';
 
 @NgModule({
 	declarations: [
@@ -47,14 +53,19 @@ import { IssueComponent } from './issue/issue.component';
 	RepoFilesComponent,
 	FooterComponent,
 	IssueCreateComponent,
-	IssueComponent
+	IssueComponent,
+	UserProfileComponent,
+	UserReposComponent,
+	UserStarsComponent,
+	IssueLabelsComponent
 	],
 	imports: [
 	BrowserModule,
 	AppRoutingModule,
-	HttpClientModule
+	HttpClientModule,
+	FormsModule
 	],
-	providers: [DashboardGuardService, UserService, CookieService, RepoService],
+	providers: [DashboardGuardService, UserService, CookieService, RepoService, IssueService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

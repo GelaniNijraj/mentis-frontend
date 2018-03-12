@@ -1,6 +1,12 @@
 export default class Repo{
-	name: string;
-	description: string;
-	url: string;
-	public: boolean;
+	constructor(
+		public name?: string,
+		public description?: string,
+		public isPublic?: boolean,
+		public owner?: string,
+		public url?: string){
+
+	}
+
+
 }

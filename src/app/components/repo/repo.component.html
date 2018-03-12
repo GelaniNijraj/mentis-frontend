@@ -1,6 +1,6 @@
 <div class="ui container" style="margin-top: 8px;">
 	<h3>
-		<a [routerLink]="['/', username]">{{username}}</a> / 
+		<a [routerLink]="['/user', username]">{{username}}</a> / 
 		<a [routerLink]="['/', username, reponame]">{{reponame}}</a>
 	</h3>
 	<p>This is where the repo description goes</p>
@@ -13,7 +13,7 @@
 		<a class="item" [routerLinkActive]="['active']" routerLink="issues">
 			Issues
 		</a>
-		<a class="item" [routerLinkActive]="['active']" routerLink="settings">
+		<a class="item" [routerLinkActive]="['active']" *ngIf="username == userService.getUsername()" routerLink="settings">
 	    	Settings
 		</a>
 	</div>

@@ -33,6 +33,12 @@ export default class UserService {
 		return this.cookies.get('username');
 	}
 
+	getUser(){
+		let u = new User();
+		u.username = this.getUsername();
+		return u;
+	}
+
 	login(username: string, password: string, callback) {
 	this.http.post(this.baseUrl + 'authenticate', {
 		username, password

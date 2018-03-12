@@ -1,3 +1,87 @@
-<p>
-  issue works!
-</p>
+<div *ngIf="issue != undefined">
+	<h3 class="ui top attached header">{{issue.title}}</h3>
+	<div class="ui segment attached grid">
+		<div class="column ten wide">
+
+			<div class="ui threaded comments">
+			  <div class="comment">
+			    <a class="avatar" [routerLink]="['/user', issue.createdBy.username]">
+			      <img src="/images/avatar/small/matt.jpg">
+			    </a>
+			    <div class="content">
+			      <a class="author" [routerLink]="['/user', issue.createdBy.username]">{{issue.createdBy.username}}</a>
+			      <div class="metadata">
+			        <span class="date"><!-- Today at 5:42PM --></span>
+			      </div>
+			      <div class="text">
+			        {{issue.description}}
+			      </div>
+			    </div>
+			  </div>
+			  <div class="comment" *ngFor="let r of issue.replies">
+			    <a class="avatar" [routerLink]="['/user', r.from.username]">
+			      <img src="/images/avatar/small/joe.jpg">
+			    </a>
+			    <div class="content">
+			      <a class="author" [routerLink]="['/user', r.from.username]">{{r.from.username}}</a>
+			      <div class="metadata">
+			        <!-- <span class="date">5 days ago</span> -->
+			      </div>
+			      <div class="text">
+			        {{r.description}}
+			      </div>
+			    </div>
+			  </div>
+			  <form class="ui reply form">
+			    <div class="field">
+			      <textarea #reply></textarea>
+			    </div>
+			    <div class="ui blue labeled submit icon button" (click)="submitReply(reply)">
+			      <i class="icon edit"></i> Add Reply
+			    </div>
+			  </form>
+			</div>
+		</div>
+		<div class="column six wide align right" *ngIf="isOwner">
+			<h3>Actions</h3>
+			<div class="ui red labeled submit icon button right aligned">
+				<i class="icon close"></i> Close Issue
+			</div>
+			<h3>
+				Labels
+			    <div class="ui blue labeled submit icon button right floated addlabel" (mouseenter)="hovered()">
+			      <i class="icon plus"></i> Add Label
+			    </div>
+				<div class="ui flowing popup top left transition hidden">
+					<form class="ui form">
+						<div class="field">
+							<label>Search labels</label>
+							<input type="text" (input)="updateLabels(labelSearch.value)" #labelSearch/>
+							<div class="ui items">
+								<div class="item" *ngFor="let l of labelResults">
+									<a (click)="assignLabel(l.title)">{{l.title}}</a>
+								</div>
+								<div class="item" *ngIf="labelResults.length == 0">
+									<a (click)="createLabel(labelSearch.value)">Create label "{{labelSearch.value}}"</a>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</h3>
+			<div class="ui segments" style="margin-top: 16px;" [hidden] = "assignedLabels.length == 0">
+				<div class="ui segment" *ngFor="let l of assignedLabels">
+					<p>
+						{{l.title}}
+						<a style="float: right; cursor: pointer;" (click)="resignLabel(l.title);"><i class="icon delete"></i></a>
+					</p>
+				</div>
+			</div>
+			<div class="ui info message" *ngIf="assignedLabels.length == 0">
+				<div class="header">No labels assigned to this issue.</div>
+			</div>
+			<h3>Participants</h3>
+
+		</div>
+	</div>
+</div>
