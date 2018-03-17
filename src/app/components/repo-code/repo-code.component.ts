@@ -14,11 +14,18 @@ export class RepoCodeComponent implements OnInit {
 	username: string;
 	allFiles: string[];
 	files: any[];
+
 	info: any;
 	fileRoot: string;
 	current: string;
 	issueCount: number;
 	parent: string;
+
+	commits = 0;
+	stars = 0;
+
+	displayFile: string;
+	displayContent: string;
 
 	constructor(
 		private repoService: RepoService, 
@@ -29,7 +36,6 @@ export class RepoCodeComponent implements OnInit {
 		route.parent.params.subscribe(params => {
 			this.reponame = params.repo;
 			this.username = params.user;
-			// let t = this.router.url.split('/').splice(4).join('/');
 			this.route.params.subscribe(q => {
 				this.current = q.path == undefined ? '' : q.path;
 				let tmp = this.current.split('/');
@@ -37,33 +43,53 @@ export class RepoCodeComponent implements OnInit {
 				repoService.getFiles(params.user, params.repo, q.path).subscribe((res: any) => {
 					this.files = res.files;
 				});
-				repoService.getInfo(params.user, params.repo).subscribe((res: any) => {
-					this.info = res.data;
+				repoService.info(params.user, params.repo).subscribe((res: any) => {
+					this.info = res;
+				});
+				repoService.starsCount(params.user, params.repo).subscribe((res: any) => {
+					if(res.success)
+						this.stars = res.count;
+				});
+				repoService.commitsCount(params.user, params.repo).subscribe((res: any) => {
+					if(res.success)
+						this.commits = res.count;
 				});
 				issueService.count(params.user, params.repo).subscribe((res: any) => {
 					if(res.success)
 						this.issueCount = res.count;
 				});
 			});
-			// try{
-			// }catch(e){
-			// 	console.log(e.message);
-			// }
 		});
 	}
 
-	setRoot(root: string) {
-		console.log(root);
+	showFile(path: string){
+		this.repoService.fileContent(this.username, this.reponame, path).subscribe((res: any) => {
+			if(res.success){
+				this.displayFile = path;
+				this.displayContent = res.content;
+			}
+		});
+		return false;
 	}
 
-	displayFiles() {
-		this.files = this.allFiles
-			.map(x => x.startsWith(this.fileRoot) ? x.substr(x.search('/') + 1, x.length) : undefined)
-			.filter(x => x != undefined);
+	starRepo(){
+		this.info.starred = true;
+		this.stars++;
+		this.repoService.star(this.username, this.reponame).subscribe((res: any) => {
+			if(!res.success)
+				this.stars--;
+		});
+		return false;
 	}
 
-	updatePath(path: string){
-		console.log(path);
+	unstarRepo(){
+		this.info.starred = false;
+		this.stars--;
+		this.repoService.unstar(this.username, this.reponame).subscribe((res: any) => {
+			if(!res.success)
+				this.stars++;
+		});
+		return false;
 	}
 
 	ngOnInit() {

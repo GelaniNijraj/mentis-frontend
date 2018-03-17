@@ -33,6 +33,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserReposComponent } from './components/user-repos/user-repos.component';
 import { UserStarsComponent } from './components/user-stars/user-stars.component';
 import { IssueLabelsComponent } from './components/issue-labels/issue-labels.component';
+import { RepoShowcaseComponent } from './components/repo-showcase/repo-showcase.component';
 
 @NgModule({
 	declarations: [
@@ -57,7 +58,8 @@ import { IssueLabelsComponent } from './components/issue-labels/issue-labels.com
 	UserProfileComponent,
 	UserReposComponent,
 	UserStarsComponent,
-	IssueLabelsComponent
+	IssueLabelsComponent,
+	RepoShowcaseComponent
 	],
 	imports: [
 	BrowserModule,

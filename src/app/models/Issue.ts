@@ -7,5 +7,6 @@ export default class Issue{
 	username: string;
 	reponame: string;
 	labels: any[];
+	open: boolean;
 	replies: IssueReply[];
 }

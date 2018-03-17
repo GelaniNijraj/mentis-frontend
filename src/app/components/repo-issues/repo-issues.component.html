@@ -18,13 +18,13 @@
 			<div class="ui segments">
 				<div class="ui segment" *ngFor="let i of issues">
 					<h3 class="ui header">
-						<a [routerLink]="[i.id]">{{i.title}}</a>
+						<a [routerLink]="['/', username, reponame, 'issues', i.id]">{{i.title}} <span *ngIf="!i.open">[CLOSED]</span></a>
 						<div class="ui horizontal bulleted link list">
-							<a class="item" *ngFor="let j of i.labels" [routerLink]="[j.title]">
+							<a class="item" *ngFor="let j of i.labels" [routerLink]="['/', username, reponame, 'issues', 'label', j.title]">
 								{{j.title}}
 							</a>
 						</div>
-						<div class="sub header">Created by <a [routerLink]="['/user', i.createdBy.username]">{{i.createdBy.username}}</a></div>
+						<div class="sub header">Posted by <a [routerLink]="['/user', i.createdBy.username]">{{i.createdBy.username}}</a> {{ago(i.postedOn)}}</div>
 					</h3>
 				</div>
 			</div>

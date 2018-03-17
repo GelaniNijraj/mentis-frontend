@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { distanceInWordsToNow } from 'date-fns';
 declare var $ : any;
 
 import IssueService from 'app/services/issue.service';
@@ -58,6 +59,10 @@ export class IssueComponent implements OnInit {
   	});
   }
 
+  ago(date: Date){
+    return distanceInWordsToNow(date) + ' ago';
+  }
+
   submitReply(reply: HTMLInputElement){
     let r = reply.value.trim();
     if(r.length > 0){
@@ -68,6 +73,7 @@ export class IssueComponent implements OnInit {
       let isr = new IssueReply();
       isr.description = r;
       isr.from = this.userService.getUser();
+      isr.postedOn = new Date();
       this.issue.replies.push(isr);
       this.issueService.reply(iss, r).subscribe((res: any) => {
         if(res.success)
@@ -135,6 +141,22 @@ export class IssueComponent implements OnInit {
       }
     })
     return false;
+  }
+
+  closeIssue(){
+    this.issue.open = false;
+    this.issueService.close(this.username, this.reponame, this.issueId).subscribe((res: any) => {
+      if(!res.success)
+        this.issue.open = true;
+    });
+  }
+
+  openIssue(){
+    this.issue.open = true;
+    this.issueService.open(this.username, this.reponame, this.issueId).subscribe((res: any) => {
+      if(!res.success)
+        this.issue.open = false;
+    });
   }
 
   ngOnInit() {

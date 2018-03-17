@@ -14,6 +14,7 @@ import UserService from 'app/services/user.service';
 export class UserReposComponent implements OnInit {
 	repos: Repo[];
 	username = '';
+	starred = false;
 
 	constructor(
 	private repoService: RepoService,
@@ -21,9 +22,21 @@ export class UserReposComponent implements OnInit {
 	private userService: UserService) {
 		route.params.subscribe(params => {
 			this.username = params.user;
-			repoService.all(params.user).subscribe((res: any) => {
-				if(res.success)
-					this.repos = res.repos;
+			route.url.subscribe(url => {
+				console.log('here');
+				if(url[2].path == 'stars'){
+					this.starred = true;
+					userService.stars(params.user).subscribe((res: any) => {
+						console.log(res);
+						if(res.success)
+							this.repos = res.stars;
+					});
+				}else if(url[2].path == 'repos'){
+					repoService.all(params.user).subscribe((res: any) => {
+						if(res.success)
+							this.repos = res.repos;
+					});
+				}
 			});
 		})
 	}

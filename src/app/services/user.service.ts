@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -10,7 +10,7 @@ import Response from 'app/models/Response';
 export default class UserService {
 
 	public loggedIn: boolean;
-	private baseUrl: string = 'http://127.0.0.1:3000/api/user/';
+	private baseUrl: string = 'http://127.0.0.1:3000/api/user';
 	private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 	private options = {headers: this.headers};
 
@@ -40,19 +40,31 @@ export default class UserService {
 	}
 
 	login(username: string, password: string, callback) {
-	this.http.post(this.baseUrl + 'authenticate', {
-		username, password
-	}, this.options).subscribe((res: Response) => {
-		if(!res.success)
-			callback(new Error(res.message));
-		this.cookies.set('token', (res as any).token);
-		this.cookies.set('username', username);
-		callback(false);
-	});
+		this.http.post(this.baseUrl + '/authenticate', {
+			username, password
+		}, this.options).subscribe((res: Response) => {
+			if(!res.success)
+				callback(new Error(res.message));
+			this.cookies.set('token', (res as any).token);
+			this.cookies.set('username', username);
+			callback(false);
+		});
+	}
+
+	stars(user: string) {
+		let params = new HttpParams();
+		params = params.append('token', this.getToken());
+		return this.http.get([this.baseUrl, user, 'stars'].join('/'), { params: params });
+	}
+
+	starsCount(user: string) {
+		let params = new HttpParams();
+		params = params.append('token', this.getToken());
+		return this.http.get([this.baseUrl, user, 'stars/count'].join('/'), { params: params });
 	}
 
 	register(user: User) {
-		return this.http.post(this.baseUrl + 'register', {
+		return this.http.post(this.baseUrl + '/register', {
 			username: user.username,
 			email: user.email,
 			password: user.password

@@ -1,9 +1,10 @@
-<div class="ui container grid" style="margin-top: 8px;">
+<div class="ui container grid" style="margin-top: 8px;" *ngIf="repos != undefined">
 	<div class="column">
-		<h2>{{username}}'s repositories</h2>
+		<h2 *ngIf="!starred">{{username}}'s repositories</h2>
+		<h2 *ngIf="starred">{{username}}'s stars</h2>
 		<div class="ui segment" *ngFor="let r of repos">
 			<h2>
-				<a routerLink="/{{username}}/{{r.name}}">{{r.name}}</a>
+				<a routerLink="/{{r.owner.username}}/{{r.name}}">{{r.name}}</a>
 				<span style="font-size: 14px;">{{r.public ? 'PUBLIC' : 'PRIVATE'}}</span>
 			</h2>
 			<p>{{r.description}}</p>

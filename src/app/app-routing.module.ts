@@ -33,7 +33,7 @@ const routes : Routes = [
 
 		{path: 'user/:user', component: UserProfileComponent},
 		{path: 'user/:user/repos', component: UserReposComponent},
-		{path: 'user/:user/stars', component: UserStarsComponent},
+		{path: 'user/:user/stars', component: UserReposComponent},
 
 		{path: ':user/:repo', component: RepoComponent, children: [
 			{path: '', redirectTo: 'code', pathMatch: 'full'},
@@ -41,6 +41,7 @@ const routes : Routes = [
 			{path: 'issues', component: RepoIssuesComponent},
 			{path: 'issues/labels', component: IssueLabelsComponent},
 			{path: 'issues/create', component: IssueCreateComponent},
+			{path: 'issues/label/:label', component: RepoIssuesComponent},
 			{path: 'issues/:id', component: IssueComponent},
 			{path: 'settings', component: RepoSettingsComponent},
 		]}

@@ -22,6 +22,18 @@ export default class IssueService {
 		}, this.options);
 	}
 
+	close(user: string, repo: string, issue: string) {
+		return this.http.post([this.baseUrl, user, repo, 'issues', issue, 'close'].join('/'), {
+			token: this.userService.getToken()
+		}, this.options);
+	}
+
+	open(user: string, repo: string, issue: string) {
+		return this.http.post([this.baseUrl, user, repo, 'issues', issue, 'open'].join('/'), {
+			token: this.userService.getToken()
+		}, this.options);
+	}
+
 	reply(issue: Issue, reply: string) {
 		return this.http.post([this.baseUrl, issue.username, issue.reponame, 'issues', issue.id, 'reply'].join('/'), {
 			description: reply,
@@ -29,9 +41,10 @@ export default class IssueService {
 		}, this.options);
 	}
 
-	all(user: string, repo: string) {
+	all(user: string, repo: string, label: string) {
 		let params = new HttpParams();
 		params = params.append('token', this.userService.getToken());
+		params = params.append('label', label);
 		return this.http.get([this.baseUrl, user, repo, 'issues', 'all'].join('/'), { params: params });
 	}
 

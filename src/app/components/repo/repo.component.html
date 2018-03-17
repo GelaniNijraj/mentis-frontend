@@ -1,9 +1,9 @@
-<div class="ui container" style="margin-top: 8px;">
+<div class="ui container" style="margin-top: 8px;" *ngIf="info != undefined">
 	<h3>
 		<a [routerLink]="['/user', username]">{{username}}</a> / 
 		<a [routerLink]="['/', username, reponame]">{{reponame}}</a>
 	</h3>
-	<p>This is where the repo description goes</p>
+	<p>{{info.description}}</p>
 </div>
 <div class="ui container" style="margin-top: 8px;">
 	<div class="ui tabular menu">

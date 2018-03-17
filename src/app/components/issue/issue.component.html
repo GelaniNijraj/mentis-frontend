@@ -1,17 +1,17 @@
 <div *ngIf="issue != undefined">
-	<h3 class="ui top attached header">{{issue.title}}</h3>
+	<h3 class="ui top attached header">{{issue.title}} <span *ngIf="!issue.open">[CLOSED]</span></h3>
 	<div class="ui segment attached grid">
 		<div class="column ten wide">
 
 			<div class="ui threaded comments">
 			  <div class="comment">
 			    <a class="avatar" [routerLink]="['/user', issue.createdBy.username]">
-			      <img src="/images/avatar/small/matt.jpg">
+			      <img src="/assets/dummy.jpg">
 			    </a>
 			    <div class="content">
 			      <a class="author" [routerLink]="['/user', issue.createdBy.username]">{{issue.createdBy.username}}</a>
 			      <div class="metadata">
-			        <span class="date"><!-- Today at 5:42PM --></span>
+			        <span class="date">{{ago(issue.postedOn)}}</span>
 			      </div>
 			      <div class="text">
 			        {{issue.description}}
@@ -25,14 +25,14 @@
 			    <div class="content">
 			      <a class="author" [routerLink]="['/user', r.from.username]">{{r.from.username}}</a>
 			      <div class="metadata">
-			        <!-- <span class="date">5 days ago</span> -->
+			        {{ago(r.postedOn)}}
 			      </div>
 			      <div class="text">
 			        {{r.description}}
 			      </div>
 			    </div>
 			  </div>
-			  <form class="ui reply form">
+			  <form class="ui reply form" *ngIf="issue.open">
 			    <div class="field">
 			      <textarea #reply></textarea>
 			    </div>
@@ -44,9 +44,15 @@
 		</div>
 		<div class="column six wide align right" *ngIf="isOwner">
 			<h3>Actions</h3>
-			<div class="ui red labeled submit icon button right aligned">
+
+			<div class="ui red labeled submit icon button right aligned" *ngIf="issue.open" (click)="closeIssue()">
 				<i class="icon close"></i> Close Issue
 			</div>
+
+			<div class="ui blue labeled submit icon button right aligned" *ngIf="!issue.open" (click)="openIssue()">
+				<i class="icon close"></i> Re-Open Issue
+			</div>
+
 			<h3>
 				Labels
 			    <div class="ui blue labeled submit icon button right floated addlabel" (mouseenter)="hovered()">
