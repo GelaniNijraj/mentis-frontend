@@ -39,16 +39,10 @@ export default class UserService {
 		return u;
 	}
 
-	login(username: string, password: string, callback) {
-		this.http.post(this.baseUrl + '/authenticate', {
+	login(username: string, password: string) {
+		return this.http.post(this.baseUrl + '/authenticate', {
 			username, password
-		}, this.options).subscribe((res: Response) => {
-			if(!res.success)
-				callback(new Error(res.message));
-			this.cookies.set('token', (res as any).token);
-			this.cookies.set('username', username);
-			callback(false);
-		});
+		}, this.options);
 	}
 
 	stars(user: string) {
@@ -63,12 +57,43 @@ export default class UserService {
 		return this.http.get([this.baseUrl, user, 'stars/count'].join('/'), { params: params });
 	}
 
+	profile(user: string) {
+		let params = new HttpParams();
+		params = params.append('token', this.getToken());
+		return this.http.get([this.baseUrl, user, 'profile'].join('/'), { params: params });
+	}
+
 	register(user: User) {
 		return this.http.post(this.baseUrl + '/register', {
 			username: user.username,
 			email: user.email,
 			password: user.password
 		}, this.options);
+	}
+
+	changePassword(user: string, oldpass: string, newpass: string) {
+		return this.http.post([this.baseUrl, user, 'settings'].join('/'), {
+			token: this.getToken(),
+			oldpass: oldpass.trim(),
+			newpass: newpass.trim()
+		}, this.options);
+	}
+
+	changeAbout(user: string, about: string) {
+		return this.http.post([this.baseUrl, user, 'settings'].join('/'), {
+			token: this.getToken(),
+			about: about.trim()
+		}, this.options);
+	}
+
+	changeProfilePic(user: string, file: HTMLInputElement) {
+		const formdata = new FormData();
+		let f = file.files[0];
+		let reader = new FileReader();
+		reader.readAsDataURL(f);
+		formdata.append('profilepic', f);
+		formdata.append('token', this.getToken());
+		return this.http.post([this.baseUrl, user, 'settings/profilepic'].join('/'), formdata, {});
 	}
 
 	logout(callback){

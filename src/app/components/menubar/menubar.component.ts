@@ -35,7 +35,7 @@ export class MenubarComponent implements OnInit, AfterViewInit {
 	ngOnInit() {}
 
 	ngAfterViewInit() {
-		$('.ui.search')
+		$('#reposearch')
 		  .search({
 		    apiSettings: {
 		      url: [config.baseUrl, 'api/repo/repos/search/{query}'].join('/')

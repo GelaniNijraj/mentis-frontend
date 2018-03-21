@@ -1,9 +1,10 @@
 <div class="ui grid centered">
 	<div class="column eight wide center aligned">
 		<a href="upload" class="ui small image">
-			<img class="ui small centered circular image" src="/assets/dummy.jpg">
+			<img class="ui small centered circular image" src="{{baseUrl}}/user/{{username}}/profile/pic?213">
 		</a>
-		<h1 class="header">nijraj</h1>
+		<h1 class="header">{{username}}</h1>
+		<p>{{about}}</p>
 		<div class="ui statistic">
 			<div class="value">{{repoCount}}</div>
 			<div class="label"><a routerLink="repos">Repos</a></div>

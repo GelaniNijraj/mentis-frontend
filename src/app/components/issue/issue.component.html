@@ -6,7 +6,7 @@
 			<div class="ui threaded comments">
 			  <div class="comment">
 			    <a class="avatar" [routerLink]="['/user', issue.createdBy.username]">
-			      <img src="/assets/dummy.jpg">
+			      <img src="{{baseUrl}}/user/{{issue.createdBy.username}}/profile/pic">
 			    </a>
 			    <div class="content">
 			      <a class="author" [routerLink]="['/user', issue.createdBy.username]">{{issue.createdBy.username}}</a>
@@ -20,7 +20,7 @@
 			  </div>
 			  <div class="comment" *ngFor="let r of issue.replies">
 			    <a class="avatar" [routerLink]="['/user', r.from.username]">
-			      <img src="/images/avatar/small/joe.jpg">
+			      <img src="{{baseUrl}}/user/{{r.from.username}}/profile/pic">
 			    </a>
 			    <div class="content">
 			      <a class="author" [routerLink]="['/user', r.from.username]">{{r.from.username}}</a>
@@ -55,7 +55,7 @@
 
 			<h3>
 				Labels
-			    <div class="ui blue labeled submit icon button right floated addlabel" (mouseenter)="hovered()">
+			    <div class="ui blue labeled submit icon mini button right floated" id="addlabel">
 			      <i class="icon plus"></i> Add Label
 			    </div>
 				<div class="ui flowing popup top left transition hidden">

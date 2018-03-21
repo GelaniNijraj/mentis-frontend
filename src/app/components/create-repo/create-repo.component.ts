@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Repo from 'app/models/Repo';
 import Response from 'app/models/Response';
 import RepoService from 'app/services/repo.service';
+import UserService from 'app/services/user.service';
 
 @Component({
 	selector: 'app-create-repo',
@@ -14,7 +15,10 @@ export class CreateRepoComponent implements OnInit {
 	error: string;
 	repo = new Repo('', '', true);
 
-	constructor(private repoService: RepoService, private router: Router) { 
+	constructor(
+		private repoService: RepoService, 
+		private userService: UserService,
+		private router: Router) { 
 	}
 
 	ngOnInit() {
@@ -23,7 +27,7 @@ export class CreateRepoComponent implements OnInit {
 	onSubmit(){
 		this.repoService.create(this.repo).subscribe((res: Response) => {
 			if(res.success)
-				this.router.navigateByUrl('/repo/all');
+				this.router.navigateByUrl(['user', this.userService.getUsername(), 'repos'].join('/'));
 			else
 				this.error = res.message;
 		});

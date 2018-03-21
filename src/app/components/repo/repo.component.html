@@ -5,12 +5,12 @@
 	</h3>
 	<p>{{info.description}}</p>
 </div>
-<div class="ui container" style="margin-top: 8px;">
+<div class="ui container" style="margin-top: 8px;" *ngIf="info != undefined">
 	<div class="ui tabular menu">
 		<a class="item" [routerLinkActive]="['active']" routerLink="code">
 			Code
 		</a>
-		<a class="item" [routerLinkActive]="['active']" routerLink="issues">
+		<a class="item" [routerLinkActive]="['active']" routerLink="issues" *ngIf="info.issuesEnabled">
 			Issues
 		</a>
 		<a class="item" [routerLinkActive]="['active']" *ngIf="username == userService.getUsername()" routerLink="settings">

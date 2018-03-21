@@ -13,7 +13,10 @@ export class UserProfileComponent implements OnInit {
 
 	repoCount = 0;
 	starsCount = 0;
-	username: string;
+	username = '';
+	baseUrl = 'http://127.0.0.1:3000/api';
+
+	about = '';
 
   constructor(
   	private route: ActivatedRoute,
@@ -23,6 +26,12 @@ export class UserProfileComponent implements OnInit {
   ) {
   	this.route.params.subscribe(params => {
   		this.username = params.user;
+
+  		this.userService.profile(this.username).subscribe((res: any) => {
+  			if(res.success)
+  				this.about = res.about;
+  		});
+
   		this.repoService.count(this.username).subscribe((res: any) => {
   			if(res.success)
   				this.repoCount = res.count;

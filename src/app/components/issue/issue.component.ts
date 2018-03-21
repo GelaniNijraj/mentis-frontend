@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { distanceInWordsToNow } from 'date-fns';
 declare var $ : any;
@@ -13,7 +13,7 @@ import IssueReply from 'app/models/IssueReply';
   templateUrl: './issue.component.html',
   styleUrls: ['./issue.component.css']
 })
-export class IssueComponent implements OnInit {
+export class IssueComponent implements OnInit, AfterViewInit {
 
 	issue: Issue;
 	username: string;
@@ -25,6 +25,7 @@ export class IssueComponent implements OnInit {
   labels = [];
   assignedLabels = [];
   labelResults = [];
+  baseUrl = 'http://127.0.0.1:3000/api';
 
   constructor(
   	private issueService: IssueService,
@@ -32,6 +33,14 @@ export class IssueComponent implements OnInit {
     private userService: UserService,
   	private route: ActivatedRoute) {
 
+    setTimeout(() => {
+      console.log('ta');
+      $('#addlabel').popup({
+        inline: true,
+        hoverable: true,
+        position: 'bottom left'
+      });
+    }, 3000);
   	route.parent.params.subscribe(params => {
   		this.username = params.user;
   		this.reponame = params.repo;
@@ -39,7 +48,6 @@ export class IssueComponent implements OnInit {
         this.issueId = p.id;
         // issue thread
   			this.issueService.get(this.username, this.reponame, this.issueId).subscribe((res: any) => {
-          console.log(res);
   				if(res.success){
   					this.issue = res.issue;
             this.isOwner = res.isOwner;
@@ -99,11 +107,7 @@ export class IssueComponent implements OnInit {
     return false;
   }
 
-  hovered(){
-    if(!this.setup){
-      $(document).trigger('popup');
-      this.setup = true;
-    }
+  ngAfterViewInit() {
   }
 
 

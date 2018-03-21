@@ -1,16 +1,27 @@
 <h3 class="ui top attached header">Issue Labels</h3>
 <div class="ui attached segment grid">
 	<div class="row">
-		<div class="column ten wide">
+		<div class="column ten wide" *ngIf="labels != undefined && labels.length">
 			<div class="ui segments">
-				<div class="ui segment" *ngFor="let l of labels">
-					<h3>{{l.title}}</h3>
+				<div class="ui segment grid" style="margin-top: 0px;" *ngFor="let l of labels">
+					<div class="column eight wide">
+						<h3>{{l.title}}</h3>
+					</div>
+					<div class="right aligned column eight wide">
+						<input type="button" value="REMOVE" class="ui red mini button inline" (click)="deleteLabel(l.title);" />
+					</div>
 				</div>
+			</div>
+		</div>
+		<div class="column ten wide" *ngIf="labels == undefined || !labels.length">
+			<div class="ui info message">
+				<div class="header">No labels created yet</div>
+				<p>Add labels to see them here</p>
 			</div>
 		</div>
 		<div class="column six wide">
 			<form class="ui form">
-				<div class="ui field">
+				<div class="ui action field">
 					<label>Label Title</label>
 					<input type="text" name="name" #name/>
 				</div>

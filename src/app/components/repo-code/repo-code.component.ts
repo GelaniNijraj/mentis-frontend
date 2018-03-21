@@ -92,6 +92,14 @@ export class RepoCodeComponent implements OnInit {
 		return false;
 	}
 
+	copyURL(el:HTMLInputElement){
+		el.focus();
+		el.select();
+		let out = document.execCommand('copy');
+		console.log(out);
+
+	}
+
 	ngOnInit() {
 	}
 

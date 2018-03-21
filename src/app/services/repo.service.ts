@@ -8,6 +8,7 @@ import UserService from 'app/services/user.service';
 export default class RepoService {
 
 	private _baseUrl: string = 'http://127.0.0.1:3000/api/repo';
+	private baseUrl: string = 'http://127.0.0.1:3000/api';
 	private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 	private options = {headers: this.headers};
 
@@ -72,6 +73,25 @@ export default class RepoService {
 		});
 	}
 
+	// settings
+	rename(user: string, repo: string, name: string) {
+		return this.http.post([this._baseUrl, user, repo, 'rename'].join('/'), {
+			token: this.userService.getToken(),
+			name: name
+		});
+	}
+
+	setIssues(user: string, repo: string, enable: boolean) {
+		if(enable)
+			return this.http.post([this.baseUrl, user, repo, 'issues/enable'].join('/'), {
+				token: this.userService.getToken()
+			});
+		else
+			return this.http.post([this.baseUrl, user, repo, 'issues/disable'].join('/'), {
+				token: this.userService.getToken()
+			});
+	}
+
 	delete(repo: Repo) {
 		return this.http.post(this._baseUrl + '/delete', {
 			token: this.userService.getToken(),
@@ -102,6 +122,25 @@ export default class RepoService {
 
 	unstar(user: string, repo: string) {
 		return this.http.post([this._baseUrl, user, repo, 'unstar'].join('/'), {
+			token: this.userService.getToken()
+		});
+	}
+
+	// contribution
+	contributors(user: string, repo: string) {
+		let params = new HttpParams();
+		params = params.append('token', this.userService.getToken());
+		return this.http.get([this._baseUrl, user, repo, 'contributors'].join('/'), { params: params });
+	}
+
+	addContributor(user: string, repo: string, contributor: string) {
+		return this.http.post([this._baseUrl, user, repo, 'contributors/add', contributor].join('/'), {
+			token: this.userService.getToken()
+		});
+	}
+
+	removeContributor(user: string, repo: string, contributor: string) {
+		return this.http.post([this._baseUrl, user, repo, 'contributors/remove', contributor].join('/'), {
 			token: this.userService.getToken()
 		});
 	}

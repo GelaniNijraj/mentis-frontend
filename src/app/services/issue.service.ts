@@ -79,6 +79,12 @@ export default class IssueService {
 		}, this.options);
 	}
 
+	deleteLabel(user: string, repo: string, title: string){
+		return this.http.post([this.baseUrl, user, repo, 'issues/labels/delete', title].join('/'), {
+			token: this.userService.getToken()
+		}, this.options);
+	}
+
 	assignLabel(user: string, repo: string, issue: string, label: string){
 		return this.http.post([this.baseUrl, user, repo, 'issues', issue, 'labels/assign', label].join('/'), {
 			token: this.userService.getToken()

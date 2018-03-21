@@ -1,0 +1,70 @@
+<div class="ui container stackable grid" style="margin-top: 8px;">
+	<div class="row">
+		<div class="column">
+			<h2>Settings</h2>
+		</div>
+	</div>
+	<div class="column six wide">
+		<div class="ui segment">
+			<form class="ui form" [ngClass]="{'success': passsuccess && passmessage.length, 'error': !passsuccess && passmessage.length}">
+				<div class="ui required field">
+					<label>Old password</label>
+					<input type="password" #oldpass />
+				</div>
+				<div class="ui required field">
+					<label>New password</label>
+					<input type="password" #newpass />
+				</div>
+				<div class="ui message error">
+					<p>{{passmessage}}</p>
+				</div>
+				<div class="ui message success">
+					<p>{{passmessage}}</p>
+				</div>
+				<input type="button" class="ui blue button" value="Update Password" #passbtn (click)="updatePassword(passbtn, oldpass, newpass);" />
+			</form>
+		</div>
+		<div class="ui segment">
+			<form class="ui form" [ngClass]="{'success': aboutsuc && aboutmsg.length, 'error': !aboutsuc && aboutmsg.length}">
+				<div class="ui field">
+					<label>About you</label>
+					<textarea #aboutbox>{{about}}</textarea>
+				</div>
+				<div class="ui message error">
+					<p>{{aboutmsg}}</p>
+				</div>
+				<div class="ui message success">
+					<p>{{aboutmsg}}</p>
+				</div>
+				<input type="button" class="ui blue button" value="Update About Me" #aboutbtn (click)="updateAboutMe(aboutbtn, aboutbox)" />
+			</form>
+		</div>
+	</div>
+	<div class="column ten wide">
+		<div class="ui segment">
+			<form class="ui form" [ngClass]="{'success': picsuc && picmsg.length, 'error': !picsuc && picmsg.length}">
+				<div class="required field">
+					<label>Profile picture</label>
+					<input type="file" #profilePic />
+				</div>
+				<div class="ui message error">
+					<p>{{picmsg}}</p>
+				</div>
+				<div class="ui message success">
+					<p>{{picmsg}}</p>
+				</div>
+				<input type="button" class="ui blue button" value="Update Profile Picture" #picbtn (click)="updateProfilePic(picbtn, profilePic)"/>
+			</form>
+		</div>
+		<div class="ui segment">
+			<h3>Delete Account</h3>
+			<div class="ui negative message">
+				<div class="header">
+					WARNING!
+				</div>
+				<p>Once the account is deleted, it can not be recovered.</p>
+			</div>
+			<input type="button" value="Delete" class="ui negative button" />
+		</div>
+	</div>
+</div>

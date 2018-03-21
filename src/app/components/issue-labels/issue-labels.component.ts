@@ -41,6 +41,27 @@ export class IssueLabelsComponent implements OnInit {
   	return false;
   }
 
+  deleteLabel(name: string){
+    let tmp = this.labels;
+    tmp.find((el, i) => {
+      if(el.title == name){
+        this
+          .issueService
+          .deleteLabel(this.username, this.reponame, name).subscribe((res: any) => {
+            if(!res.success)
+              this.labels.push({title: name});
+          });
+        if(i + 1 < tmp.length)
+          tmp = tmp.slice(0, i).concat(tmp.slice(i + 1, tmp.length));
+        else
+          tmp = tmp.slice(0, i);
+        this.labels = tmp;
+        return true;
+      }
+    })
+    return false;
+  }
+
   ngOnInit() {
   }
 

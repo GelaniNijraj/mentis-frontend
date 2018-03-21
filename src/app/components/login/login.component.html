@@ -13,6 +13,9 @@
 						<input type="password" name="password" #password />
 					</div>
 					<button class="ui button" type="submit" (click)="loginButtonPressed(username, password)">Log-In</button>
+					<div class="ui error message">
+						<p>{{message}}</p>
+					</div>
 				</form>
 			</div>
 		</div>

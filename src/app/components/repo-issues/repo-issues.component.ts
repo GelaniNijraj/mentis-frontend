@@ -12,15 +12,13 @@ import IssueService from 'app/services/issue.service';
 export class RepoIssuesComponent implements OnInit {
 	username: string;
 	reponame: string;
-	issues: any[];
+	issues = [];
 
 	constructor(
 		private issueService: IssueService,
 		private route: ActivatedRoute){
-		console.log(distanceInWordsToNow(new Date()));
 		route.params.subscribe(p => {
 			let label = p.label;
-			console.log(label);
 			route.parent.params.subscribe(params => {
 				this.username = params.user;
 				this.reponame = params.repo;

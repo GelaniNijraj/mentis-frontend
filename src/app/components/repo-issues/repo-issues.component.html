@@ -15,7 +15,7 @@
 			<div class="ui info message" *ngIf="issues == undefined || issues.length == 0">
 				<div class="header">No issues created yet.</div>
 			</div>
-			<div class="ui segments">
+			<div class="ui segments" *ngIf="issues.length">
 				<div class="ui segment" *ngFor="let i of issues">
 					<h3 class="ui header">
 						<a [routerLink]="['/', username, reponame, 'issues', i.id]">{{i.title}} <span *ngIf="!i.open">[CLOSED]</span></a>

@@ -1,25 +1,25 @@
-<h3 class="ui top attached header">Change Settings</h3>
-<div class="ui attached segment stackable grid">
+<h3 class="ui top attached header">Basic Settings</h3>
+<div class="ui attached segment stackable grid" *ngIf="info != undefined">
 	<div class="column eight wide right">
-		<form class="ui form">
-			<div class="field">
-				<label>Repository Name</label>
-				<input type="text" name="reponame" #reponame />
-			</div>
-			<button class="ui button" type="submit">Rename</button>
-		</form>
 		<div class="ui segment">
-			<h3><input type="checkbox" checked style="margin-right: 16px;" />Issues</h3>
+			<form class="ui form">
+				<div class="field">
+					<label>Repository Name</label>
+					<input type="text" name="reponame" value="{{reponame}}" #reponamebox />
+				</div>
+				<button class="ui blue button" (click)="renameRepo(reponamebox.value)">Rename Repo</button>
+			</form>
+		</div>
+		<div class="ui segment">
+			<h3><input type="checkbox" checked style="margin-right: 16px;" [checked]="info.issuesEnabled" #issuesChecbox (click)="updateIssues(issuesChecbox);"/>Issues</h3>
 			<p>Issues adds lightweight issue tracking tightly integrated with your repository. Add issues to milestones, label issues, and close and reference issues from commit messages.</p>
 		</div>
 	</div>
 	<div class="column eight wide right">
 		<div class="ui segment">
-			<h3><input type="checkbox" checked style="margin-right: 16px;" />Public</h3>
+			<h3><input type="checkbox" [checked]="true" style="margin-right: 16px;" />Public</h3>
 			<p>Public repositories can be accessed by anyone and appear in search.</p>
 		</div>
-	</div>
-	<div class="column eight wide right">
 		<div class="ui segment">
 			<h3>Delete Repository</h3>
 			<div class="ui negative message">
@@ -29,6 +29,38 @@
 				<p>Once the repository is deleted, it can not be recovered.</p>
 			</div>
 			<input type="button" value="Delete" class="ui negative button" (click)="deleteRepo()" />
+		</div>
+	</div>
+</div>
+
+<h3 class="ui top attached header">Contributors</h3>
+<div class="ui attached segment stackable grid">
+	<div class="column five wide">
+		<div class="ui search" id="usersearch">
+		  <div class="ui action fluid input" [ngClass]="{'error': conerr}">
+				<input class="prompt" placeholder="Search users..." type="text" #usrbox />
+				<button class="ui button" #addusrbtn (click)="addContributor(addusrbtn, usrbox);">Add User</button>
+		  </div>
+		  <div class="results"></div>
+		</div>
+	</div>
+	<div class="column sixteen wide">
+		<div class="ui info message" *ngIf="!contributors.length">
+			<div class="header">No contributors added yet</div>
+			<p>Contributors has complete read and write access to the repository. You can add individual users or groups as contributors.</p>
+		</div>
+
+		<div class="ui segments" *ngIf="contributors.length">
+			<div class="ui segment item" *ngFor="let c of contributors">
+				<div class="ui grid">
+					<div class="row">
+						<div class="column four wide"><h4><i class="icon user"></i>{{c.username}}</h4></div>
+						<div class="column twelve wide right aligned">
+							<input type="button" class="ui red mini button" value="REMOVE" (click)="removeContributor(c.username);" />
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

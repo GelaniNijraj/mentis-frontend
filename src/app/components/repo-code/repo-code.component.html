@@ -1,10 +1,12 @@
 <h3 class="ui top attached header">Overview</h3>
 <div class="ui attached grid stackable segment">
 	<div class="row" *ngIf="info != undefined">
-		<div class="ui column six wide left form">
-			<div class="field">
-				<label>Clone URL</label>
-				<input type="text" disabled value="{{info.url}}">
+		<div class="ui column six wide">
+			<div class="ui action input">
+				<input value="{{info.url}}" type="text" readonly #URLField>
+				<button class="ui teal right labeled icon button" (click)="copyURL(URLField)">
+					<i class="copy icon"></i>Copy Clone URL
+				</button>
 			</div>
 		</div>
 		<div class="ui column two wide">
@@ -25,9 +27,9 @@
 			<!-- <button class="ui button">
 				<i class="icon copy"></i>Fork
 			</button> -->
-			<!-- <button class="ui green button">
+			<button class="ui green button">
 				<i class="icon plus"></i>Upload File
-			</button> -->
+			</button>
 		</div>
 	</div>
 </div>
@@ -38,6 +40,11 @@
 	</div>
 	<div *ngIf="current != '' && current != undefined" class="ui segment">
 		<a [routerLink]="[{path: parent}]">..</a>
+	</div>
+	<div class="ui segment" *ngIf="files == undefined || files.length == 0">
+		<div class="ui info message">
+			<div class="header">No files in this directory.</div>
+		</div>
 	</div>
 	<div *ngFor="let f of files" class="ui segment">
 		<i class="icon file grey" *ngIf="f.type == 'file'"></i>

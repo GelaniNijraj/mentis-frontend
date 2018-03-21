@@ -5,7 +5,7 @@
 	<div class="item">
 		Welcome, {{userService.getUsername()}}
 	</div>
-	<div class="ui search item">
+	<div class="ui search item" id="reposearch">
 	    <div class="ui transparent icon input">
 	      <input class="prompt" placeholder="Search public repository..." type="text">
 	      <i class="search icon"></i>
@@ -23,7 +23,7 @@
 			<i class="icon user"></i>
 			<div class="menu">
 				<a class="item" [routerLink]="['/user', userService.getUsername(), 'repos']">Your Repos</a>
-				<a class="item" routerLink="/settings">Settings</a>
+				<a class="item" [routerLink]="['/user', userService.getUsername(), 'settings']">Settings</a>
 				<a class="item" [routerLink]="['/user', userService.getUsername()]">Profile</a>
 				<a class="item" (click)="logout()">Log-Out</a>
 			</div>

@@ -16,7 +16,6 @@ import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateRepoComponent } from './components/create-repo/create-repo.component';
-import { SettingsComponent } from './components/settings/settings.component';
 import { RepoComponent } from './components/repo/repo.component';
 import { DashboardHomeComponent } from './components/dashboard-home/dashboard-home.component';
 import { MenubarComponent } from './components/menubar/menubar.component';
@@ -34,6 +33,7 @@ import { UserReposComponent } from './components/user-repos/user-repos.component
 import { UserStarsComponent } from './components/user-stars/user-stars.component';
 import { IssueLabelsComponent } from './components/issue-labels/issue-labels.component';
 import { RepoShowcaseComponent } from './components/repo-showcase/repo-showcase.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 @NgModule({
 	declarations: [
@@ -42,7 +42,6 @@ import { RepoShowcaseComponent } from './components/repo-showcase/repo-showcase.
 	HomeComponent,
 	DashboardComponent,
 	CreateRepoComponent,
-	SettingsComponent,
 	RepoComponent,
 	DashboardHomeComponent,
 	MenubarComponent,
@@ -59,7 +58,8 @@ import { RepoShowcaseComponent } from './components/repo-showcase/repo-showcase.
 	UserReposComponent,
 	UserStarsComponent,
 	IssueLabelsComponent,
-	RepoShowcaseComponent
+	RepoShowcaseComponent,
+	UserSettingsComponent
 	],
 	imports: [
 	BrowserModule,
