@@ -24,9 +24,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	loginButtonPressed(username: HTMLInputElement, password: HTMLInputElement){
-		// TODO: login logic
 		this.userService.login(username.value, password.value).subscribe((res: any) => {
-			console.log(res);
 			if(res.success){
 				this.cookies.set('token', res.token);
 				this.cookies.set('username', username.value);

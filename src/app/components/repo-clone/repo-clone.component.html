@@ -1,0 +1,23 @@
+<div>
+	<h3 class="ui top attached header">Clone this repo to your account</h3>
+	<div class="ui attached segment">
+		<form class="ui form">
+			<div class="two fields">
+				<div class="ui field">
+					<label>Repo name</label>
+					<input type="text" #name />
+				</div>
+			</div>
+			<div class="two fields">
+				<div class="ui field">
+					<label>Description</label>
+					<input type="text" #description />
+				</div>
+			</div>
+			<div class="ui info message" *ngIf="message.length > 0">  
+				<p>{{message}}</p>
+			</div>
+			<input type="button" class="ui green button" value="Clone" (click)="cloneRepo(name, description);" />
+		</form>
+	</div>
+</div>

@@ -21,8 +21,9 @@ import { IssueComponent }			from './components/issue/issue.component';
 import { UserProfileComponent } 	from './components/user-profile/user-profile.component';
 import { UserReposComponent } 		from './components/user-repos/user-repos.component';
 import { UserStarsComponent } 		from './components/user-stars/user-stars.component';
-import { UserSettingsComponent } 		from './components/user-settings/user-settings.component';
-import { IssueLabelsComponent } 	from './components/issue-labels/issue-labels.component';	
+import { UserSettingsComponent } 	from './components/user-settings/user-settings.component';
+import { IssueLabelsComponent } 	from './components/issue-labels/issue-labels.component';
+import { RepoCloneComponent } 		from './components/repo-clone/repo-clone.component';
 
 const routes : Routes = [
 	{path: '', component: DashboardComponent, children: [
@@ -38,6 +39,7 @@ const routes : Routes = [
 		{path: ':user/:repo', component: RepoComponent, children: [
 			{path: '', redirectTo: 'code', pathMatch: 'full'},
 			{path: 'code', component: RepoCodeComponent},
+			{path: 'code/clone', component: RepoCloneComponent},
 			{path: 'issues', component: RepoIssuesComponent},
 			{path: 'issues/labels', component: IssueLabelsComponent},
 			{path: 'issues/create', component: IssueCreateComponent},

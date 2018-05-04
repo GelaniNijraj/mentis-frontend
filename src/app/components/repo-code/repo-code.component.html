@@ -11,7 +11,7 @@
 		</div>
 		<div class="ui column two wide">
 			<p><i class="icon history"></i>{{commits}} Commits</p>
-			<p><i class="icon code branch"></i>2 branches</p>
+			<p><i class="icon code branch"></i>{{branches}} branch</p>
 		</div>
 		<div class="ui column two wide">
 			<p><i class="icon bug"></i>{{issueCount}} Issues</p>
@@ -24,12 +24,12 @@
 			<button class="ui button yellow" (click)="unstarRepo();" *ngIf="info.starred">
 				<i class="icon star"></i>Starred
 			</button>
-			<!-- <button class="ui button">
-				<i class="icon copy"></i>Fork
-			</button> -->
-			<button class="ui green button">
-				<i class="icon plus"></i>Upload File
+			<button class="ui button" routerLink="clone">
+				<i class="icon copy"></i>Clone
 			</button>
+			<!-- <button class="ui green button">
+				<i class="icon plus"></i>Upload File
+			</button> -->
 		</div>
 	</div>
 </div>

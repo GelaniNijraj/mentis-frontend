@@ -22,6 +22,7 @@ export class RepoCodeComponent implements OnInit {
 	parent: string;
 
 	commits = 0;
+	branches = 0;
 	stars = 0;
 
 	displayFile: string;
@@ -53,6 +54,10 @@ export class RepoCodeComponent implements OnInit {
 				repoService.commitsCount(params.user, params.repo).subscribe((res: any) => {
 					if(res.success)
 						this.commits = res.count;
+				});
+				repoService.branchCount(params.user, params.repo).subscribe((res: any) => {
+					if(res.success)
+						this.branches = res.count;
 				});
 				issueService.count(params.user, params.repo).subscribe((res: any) => {
 					if(res.success)
@@ -96,8 +101,6 @@ export class RepoCodeComponent implements OnInit {
 		el.focus();
 		el.select();
 		let out = document.execCommand('copy');
-		console.log(out);
-
 	}
 
 	ngOnInit() {

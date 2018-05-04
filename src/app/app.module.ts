@@ -34,6 +34,7 @@ import { UserStarsComponent } from './components/user-stars/user-stars.component
 import { IssueLabelsComponent } from './components/issue-labels/issue-labels.component';
 import { RepoShowcaseComponent } from './components/repo-showcase/repo-showcase.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { RepoCloneComponent } from './components/repo-clone/repo-clone.component';
 
 @NgModule({
 	declarations: [
@@ -59,7 +60,8 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
 	UserStarsComponent,
 	IssueLabelsComponent,
 	RepoShowcaseComponent,
-	UserSettingsComponent
+	UserSettingsComponent,
+	RepoCloneComponent
 	],
 	imports: [
 	BrowserModule,

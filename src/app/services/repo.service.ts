@@ -107,11 +107,27 @@ export default class RepoService {
 		return this.http.get([this._baseUrl, user, repo, 'commits/count'].join('/'), { params: params });
 	}
 
+	// branchy stuff
+	branchCount(user: string, repo: string) {
+		let params = new HttpParams();
+		params = params.append('token', this.userService.getToken());
+		return this.http.get([this._baseUrl, user, repo, 'branches/count'].join('/'), { params: params });
+	}
+
 	// starry stuff
 	starsCount(user: string, repo: string) {
 		let params = new HttpParams();
 		params = params.append('token', this.userService.getToken());
 		return this.http.get([this._baseUrl, user, repo, 'stars/count'].join('/'), { params: params });
+	}
+
+	// clonny stuff
+	clone(user: string, repo: string, name: string, description: string) {
+		return this.http.post([this._baseUrl, user, repo, 'clone'].join('/'), {
+			name: name,
+			description: description,
+			token: this.userService.getToken()
+		});
 	}
 
 	star(user: string, repo: string) {

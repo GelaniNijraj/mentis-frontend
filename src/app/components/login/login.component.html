@@ -12,10 +12,10 @@
 						<label>Password</label>
 						<input type="password" name="password" #password />
 					</div>
-					<button class="ui button" type="submit" (click)="loginButtonPressed(username, password)">Log-In</button>
-					<div class="ui error message">
+					<div class="ui err message" *ngIf="message.length > 0">
 						<p>{{message}}</p>
 					</div>
+					<button class="ui button" type="submit" (click)="loginButtonPressed(username, password)">Log-In</button>
 				</form>
 			</div>
 		</div>
